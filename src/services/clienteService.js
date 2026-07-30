@@ -11,21 +11,12 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase/config';
 
-/**
- * Resolve o caminho da collection de clientes.
- * - Com empresaId → empresas/{empresaId}/clientes  (SaaS)
- * - Sem empresaId → clientes                       (fallback legado)
- */
 function resolverCol(empresaId) {
-  return empresaId
-    ? collection(db, 'empresas', empresaId, 'clientes')
-    : collection(db, 'clientes');
+  return collection(db, 'empresas', empresaId, 'clientes');
 }
 
 function resolverDoc(empresaId, id) {
-  return empresaId
-    ? doc(db, 'empresas', empresaId, 'clientes', id)
-    : doc(db, 'clientes', id);
+  return doc(db, 'empresas', empresaId, 'clientes', id);
 }
 
 export const clienteService = {

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { useEmpresa } from '../hooks/useEmpresa';
 import { empresaService } from '../services/empresaService';
 
 const errorMessages = {
@@ -24,6 +25,7 @@ export default function Login() {
   const [error, setError] = useState('');
 
   const { login, register } = useAuth();
+  const { refreshEmpresa } = useEmpresa();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -43,7 +45,10 @@ export default function Login() {
           email,
         });
 
-        // 3. Firebase já faz login automático — redireciona ao Dashboard
+        // 3. Força o contexto a reler users/{uid} já criado antes de navegar
+        await refreshEmpresa();
+
+        // 4. Firebase já faz login automático — redireciona ao Dashboard
         navigate('/');
       } else {
         await login(email, password);

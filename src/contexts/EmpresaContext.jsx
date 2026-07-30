@@ -6,6 +6,7 @@ import { empresaService } from '../services/empresaService';
 const EmpresaContext = createContext(null);
 
 export function EmpresaProvider({ children }) {
+  const [user, setUser] = useState(null);
   const [empresa, setEmpresa] = useState(null);
   const [assinatura, setAssinatura] = useState(null);
   const [empresaId, setEmpresaId] = useState(null);
@@ -14,6 +15,7 @@ export function EmpresaProvider({ children }) {
   const [needsSetup, setNeedsSetup] = useState(false);
 
   const resetar = useCallback(() => {
+    setUser(null);
     setEmpresa(null);
     setAssinatura(null);
     setEmpresaId(null);
@@ -48,7 +50,7 @@ export function EmpresaProvider({ children }) {
         setEmpresa(dadosEmpresa);
         setAssinatura(dadosAssinatura);
         setEmpresaId(userData.empresaId);
-        setRole(userData.role ?? 'admin');
+        setRole(userData.role ?? 'staff');
         setNeedsSetup(false);
       } else {
         // Documento da empresa foi removido — trata como setup pendente
@@ -63,9 +65,10 @@ export function EmpresaProvider({ children }) {
   }, [resetar]);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      setUser(firebaseUser);
       setLoading(true);
-      carregarEmpresa(user);
+      carregarEmpresa(firebaseUser);
     });
     return unsubscribe;
   }, [carregarEmpresa]);
@@ -81,6 +84,9 @@ export function EmpresaProvider({ children }) {
   return (
     <EmpresaContext.Provider
       value={{
+        // Usuário autenticado
+        user,
+
         // Empresa
         empresa,
         empresaId,

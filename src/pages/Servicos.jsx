@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Modal from '../components/Modal';
 import ConfirmDialog from '../components/ConfirmDialog';
@@ -28,7 +29,7 @@ function formatarDuracao(min) {
 }
 
 export default function Servicos() {
-  const { empresaId } = useEmpresa();
+  const { empresaId, role } = useEmpresa();
   const { servicos, loading, recarregar } = useServicos();
   const toast = useToast();
 
@@ -37,6 +38,8 @@ export default function Servicos() {
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
   const [confirm, setConfirm] = useState({ open: false, id: null, nome: '' });
+
+  if (role !== 'admin') return <Navigate to="/" replace />;
 
   const openAdd = () => {
     setEditingId(null);

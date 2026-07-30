@@ -11,21 +11,12 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase/config';
 
-/**
- * Resolve o caminho da collection de agendamentos.
- * - Com empresaId → empresas/{empresaId}/agendamentos  (SaaS)
- * - Sem empresaId → agendamentos                       (fallback legado)
- */
 function resolverCol(empresaId) {
-  return empresaId
-    ? collection(db, 'empresas', empresaId, 'agendamentos')
-    : collection(db, 'agendamentos');
+  return collection(db, 'empresas', empresaId, 'agendamentos');
 }
 
 function resolverDoc(empresaId, id) {
-  return empresaId
-    ? doc(db, 'empresas', empresaId, 'agendamentos', id)
-    : doc(db, 'agendamentos', id);
+  return doc(db, 'empresas', empresaId, 'agendamentos', id);
 }
 
 export const agendamentoService = {

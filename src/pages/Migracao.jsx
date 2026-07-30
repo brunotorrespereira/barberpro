@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import { useEmpresa } from '../hooks/useEmpresa';
 import { migrarDados } from '../utils/migrarDados';
 import Sidebar from '../components/Sidebar';
@@ -9,13 +10,15 @@ const estadoInicial = () =>
   Object.fromEntries(COLECOES.map(c => [c, { status: 'aguardando', migrados: 0, total: 0, erros: 0 }]));
 
 export default function Migracao() {
-  const { empresaId, empresa } = useEmpresa();
+  const { empresaId, empresa, role } = useEmpresa();
 
   const [colecoes, setColecoes] = useState(estadoInicial);
   const [rodando, setRodando] = useState(false);
   const [concluido, setConcluido] = useState(false);
   const [confirmando, setConfirmando] = useState(false);
   const [erroGeral, setErroGeral] = useState('');
+
+  if (role !== 'admin') return <Navigate to="/" replace />;
 
   const atualizarColecao = (nome, patch) =>
     setColecoes(prev => ({ ...prev, [nome]: { ...prev[nome], ...patch } }));

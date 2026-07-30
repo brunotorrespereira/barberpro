@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from './hooks/useAuth';
 import { useEmpresa } from './hooks/useEmpresa';
 import { EmpresaProvider } from './contexts/EmpresaContext';
 import { ToastProvider } from './components/Toast';
@@ -20,10 +19,9 @@ import Loading from './components/Loading';
  * - Autenticado com empresa → renderiza normalmente
  */
 function PrivateRoute({ children }) {
-  const { user, loading: authLoading } = useAuth();
-  const { needsSetup, loading: empresaLoading } = useEmpresa();
+  const { user, needsSetup, loading } = useEmpresa();
 
-  if (authLoading || empresaLoading) return <Loading />;
+  if (loading) return <Loading />;
   if (!user) return <Navigate to="/login" replace />;
   if (needsSetup) return <Navigate to="/setup" replace />;
   return children;
@@ -36,10 +34,9 @@ function PrivateRoute({ children }) {
  * - Role diferente de admin → /
  */
 function AdminRoute({ children }) {
-  const { user, loading: authLoading } = useAuth();
-  const { needsSetup, role, loading: empresaLoading } = useEmpresa();
+  const { user, needsSetup, role, loading } = useEmpresa();
 
-  if (authLoading || empresaLoading) return <Loading />;
+  if (loading) return <Loading />;
   if (!user) return <Navigate to="/login" replace />;
   if (needsSetup) return <Navigate to="/setup" replace />;
   if (role !== 'admin') return <Navigate to="/" replace />;
@@ -53,10 +50,9 @@ function AdminRoute({ children }) {
  * - Autenticado sem empresa → renderiza Setup
  */
 function SetupRoute({ children }) {
-  const { user, loading: authLoading } = useAuth();
-  const { needsSetup, loading: empresaLoading } = useEmpresa();
+  const { user, needsSetup, loading } = useEmpresa();
 
-  if (authLoading || empresaLoading) return <Loading />;
+  if (loading) return <Loading />;
   if (!user) return <Navigate to="/login" replace />;
   if (!needsSetup) return <Navigate to="/" replace />;
   return children;

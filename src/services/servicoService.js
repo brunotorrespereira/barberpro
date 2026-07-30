@@ -12,15 +12,11 @@ import {
 import { db } from '../firebase/config';
 
 function resolverCol(empresaId) {
-  return empresaId
-    ? collection(db, 'empresas', empresaId, 'servicos')
-    : collection(db, 'servicos');
+  return collection(db, 'empresas', empresaId, 'servicos');
 }
 
 function resolverDoc(empresaId, id) {
-  return empresaId
-    ? doc(db, 'empresas', empresaId, 'servicos', id)
-    : doc(db, 'servicos', id);
+  return doc(db, 'empresas', empresaId, 'servicos', id);
 }
 
 export const servicoService = {
