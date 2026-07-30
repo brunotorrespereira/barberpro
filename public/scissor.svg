@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Dark background -->
+  <circle cx="32" cy="32" r="32" fill="#1a1a2e"/>
+
+  <!-- Scissors icon centered, gold color -->
+  <g fill="#d4a847" transform="translate(10, 10) scale(0.6875)">
+    <!--
+      Standard scissors shape:
+      - Two blades meeting at a pivot
+      - Two finger rings at bottom
+    -->
+    <!-- Ring left -->
+    <circle cx="14" cy="54" r="8" fill="none" stroke="#d4a847" stroke-width="4"/>
+    <!-- Ring right -->
+    <circle cx="50" cy="54" r="8" fill="none" stroke="#d4a847" stroke-width="4"/>
+
+    <!-- Left blade: from ring up to pivot then tip -->
+    <line x1="14" y1="46" x2="32" y2="28" stroke="#d4a847" stroke-width="4.5" stroke-linecap="round"/>
+    <line x1="32" y1="28" x2="54" y2="8"  stroke="#d4a847" stroke-width="4.5" stroke-linecap="round"/>
+
+    <!-- Right blade -->
+    <line x1="50" y1="46" x2="32" y2="28" stroke="#d4a847" stroke-width="4.5" stroke-linecap="round"/>
+    <line x1="32" y1="28" x2="10" y2="8"  stroke="#d4a847" stroke-width="4.5" stroke-linecap="round"/>
+
+    <!-- Pivot screw -->
+    <circle cx="32" cy="28" r="4" fill="#d4a847"/>
+  </g>
+</svg>
