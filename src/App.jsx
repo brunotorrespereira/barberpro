@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useEmpresa } from './hooks/useEmpresa';
 import { EmpresaProvider } from './contexts/EmpresaContext';
