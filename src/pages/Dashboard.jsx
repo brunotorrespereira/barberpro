@@ -1,5 +1,13 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+  Users,
+  CalendarDays,
+  DollarSign,
+  Scissors,
+  Zap,
+  ClipboardList,
+} from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import { useClientes } from '../hooks/useClientes';
 import { useAgendamentos } from '../hooks/useAgendamentos';
@@ -63,19 +71,19 @@ export default function Dashboard() {
 
   const stats = [
     {
-      icon: '👥',
+      icon: <Users size={28} />,
       value: loading ? '...' : clientes.length,
       label: 'Total de Clientes',
       change: '+3 este mês',
     },
     {
-      icon: '📅',
+      icon: <CalendarDays size={28} />,
       value: loading ? '...' : agendamentosHoje.length,
       label: 'Agendamentos Hoje',
       change: loading ? '' : `${formatarValor(faturamentoDia)} hoje`,
     },
     {
-      icon: '💰',
+      icon: <DollarSign size={28} />,
       value: loading ? '...' : formatarValor(faturamentoMes),
       label: 'Faturamento do Mês',
       change: loading ? '' : `${agendamentos.filter(a => {
@@ -84,7 +92,7 @@ export default function Dashboard() {
       }).length} concluídos`,
     },
     {
-      icon: '💈',
+      icon: <Scissors size={28} />,
       value: loading ? '...' : barbeirosAtivos,
       label: 'Barbeiros Ativos',
       change: `de ${barbeiros.length} cadastrados`,
@@ -97,7 +105,7 @@ export default function Dashboard() {
       <main className="main-content">
         <div className="dashboard-welcome">
           <h1 className="dashboard-welcome-title">
-            Bem-vindo ao <span style={{ color: 'var(--accent)' }}>BarberPro</span> ✂️
+            Bem-vindo ao <span style={{ color: 'var(--accent)' }}>BarberPro</span> <Scissors size={28} style={{ verticalAlign: 'middle' }} />
           </h1>
           <p className="dashboard-welcome-sub">
             {new Date().toLocaleDateString('pt-BR', {
@@ -121,29 +129,33 @@ export default function Dashboard() {
         </div>
 
         <div className="card" style={{ marginBottom: '2rem' }}>
-          <div className="section-title">⚡ Ações Rápidas</div>
+          <div className="section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <Zap size={18} /> Ações Rápidas
+          </div>
           <div className="quick-actions">
             <button className="btn btn-primary" onClick={() => navigate('/clientes')}>
-              👥 Novo Cliente
+              <Users size={16} /> Novo Cliente
             </button>
             <button className="btn btn-primary" onClick={() => navigate('/agendamentos')}>
-              📅 Novo Agendamento
+              <CalendarDays size={16} /> Novo Agendamento
             </button>
             <button className="btn btn-secondary" onClick={() => navigate('/barbeiros')}>
-              💈 Gerenciar Barbeiros
+              <Scissors size={16} /> Gerenciar Barbeiros
             </button>
           </div>
         </div>
 
         <div className="card">
-          <div className="section-title">📋 Agendamentos Recentes</div>
+          <div className="section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <ClipboardList size={18} /> Agendamentos Recentes
+          </div>
           {loading ? (
             <div className="empty-state">
               <div className="loading-spinner"></div>
             </div>
           ) : recentAgendamentos.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-state-icon">📅</div>
+              <div className="empty-state-icon"><CalendarDays size={48} /></div>
               <div className="empty-state-title">Nenhum agendamento</div>
               <div className="empty-state-text">
                 Crie seu primeiro agendamento clicando no botão acima.

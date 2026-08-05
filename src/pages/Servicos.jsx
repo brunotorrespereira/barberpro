@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { Scissors, Pencil, Trash2 } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import Modal from '../components/Modal';
 import ConfirmDialog from '../components/ConfirmDialog';
@@ -121,7 +122,7 @@ export default function Servicos() {
       <Sidebar />
       <main className="main-content">
         <div className="page-header">
-          <h1 className="page-title">✂️ Serviços</h1>
+          <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Scissors size={22} /> Serviços</h1>
           <button className="btn btn-primary" onClick={openAdd}>
             + Novo Serviço
           </button>
@@ -139,7 +140,7 @@ export default function Servicos() {
             </div>
           ) : servicos.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-state-icon">✂️</div>
+              <div className="empty-state-icon"><Scissors size={48} /></div>
               <div className="empty-state-title">Nenhum serviço cadastrado</div>
               <div className="empty-state-text">Clique em "+ Novo Serviço" para começar.</div>
             </div>
@@ -175,8 +176,8 @@ export default function Servicos() {
                       </td>
                       <td>
                         <div className="table-actions" style={{ justifyContent: 'center' }}>
-                          <button className="btn-icon btn-icon-edit" title="Editar" onClick={() => openEdit(s)}>✏️</button>
-                          <button className="btn-icon btn-icon-delete" title="Excluir" onClick={() => setConfirm({ open: true, id: s.id, nome: s.nome })}>🗑️</button>
+                          <button className="btn-icon btn-icon-edit" title="Editar" onClick={() => openEdit(s)}><Pencil size={15} /></button>
+                          <button className="btn-icon btn-icon-delete" title="Excluir" onClick={() => setConfirm({ open: true, id: s.id, nome: s.nome })}><Trash2 size={15} /></button>
                         </div>
                       </td>
                     </tr>
@@ -187,7 +188,16 @@ export default function Servicos() {
           )}
         </div>
 
-        <Modal isOpen={modalOpen} onClose={closeModal} title={editingId ? '✏️ Editar Serviço' : '✂️ Novo Serviço'} size="sm">
+        <Modal
+          isOpen={modalOpen}
+          onClose={closeModal}
+          title={
+            editingId
+              ? <><Pencil size={16} style={{ verticalAlign: 'middle', marginRight: '0.35rem' }} />Editar Serviço</>
+              : <><Scissors size={16} style={{ verticalAlign: 'middle', marginRight: '0.35rem' }} />Novo Serviço</>
+          }
+          size="sm"
+        >
           <form onSubmit={handleSubmit}>
             <div className="modal-body">
               <div className="input-group">

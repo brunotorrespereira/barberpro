@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import { CheckCircle, XCircle, AlertTriangle, Info, X } from 'lucide-react';
 
 const ToastContext = createContext(null);
 
@@ -9,17 +10,17 @@ function ToastItem({ id, message, type, onClose }) {
   }, [id, onClose]);
 
   const icons = {
-    success: '✅',
-    error: '❌',
-    warning: '⚠️',
-    info: 'ℹ️',
+    success: <CheckCircle size={16} />,
+    error:   <XCircle size={16} />,
+    warning: <AlertTriangle size={16} />,
+    info:    <Info size={16} />,
   };
 
   return (
     <div className={`toast toast-${type}`}>
       <span className="toast-icon">{icons[type] || icons.info}</span>
       <span className="toast-message">{message}</span>
-      <button className="toast-close" onClick={() => onClose(id)}>✕</button>
+      <button className="toast-close" onClick={() => onClose(id)}><X size={14} /></button>
     </div>
   );
 }

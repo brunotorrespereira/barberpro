@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { RefreshCw, AlertTriangle, CheckCircle, Rocket } from 'lucide-react';
 import { useEmpresa } from '../hooks/useEmpresa';
 import { migrarDados } from '../utils/migrarDados';
 import Sidebar from '../components/Sidebar';
@@ -68,12 +69,12 @@ export default function Migracao() {
       <Sidebar />
       <main className="main-content">
         <div className="page-header">
-          <h1 className="page-title">🔄 Migração de Dados</h1>
+          <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><RefreshCw size={22} /> Migração de Dados</h1>
         </div>
 
         {/* Aviso */}
         <div className="card" style={{ borderColor: 'var(--accent)', marginBottom: '1.5rem' }}>
-          <p style={{ fontWeight: 600, marginBottom: '0.5rem' }}>⚠️ Leia antes de continuar</p>
+          <p style={{ fontWeight: 600, marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}><AlertTriangle size={16} /> Leia antes de continuar</p>
           <ul style={{ color: 'var(--text-secondary)', lineHeight: 2, paddingLeft: '1.2rem' }}>
             <li>Esta operação copia dados das coleções legadas para a sua empresa.</li>
             <li>É <strong style={{ color: 'var(--text-primary)' }}>idempotente</strong> — pode ser executada mais de uma vez sem duplicar registros.</li>
@@ -146,8 +147,8 @@ export default function Migracao() {
         {/* Sucesso */}
         {concluido && (
           <div className="card" style={{ borderColor: 'var(--success)', marginBottom: '1.5rem', textAlign: 'center' }}>
-            <p style={{ color: 'var(--success)', fontWeight: 600, fontSize: '1.1rem' }}>
-              ✅ Migração concluída com sucesso!
+            <p style={{ color: 'var(--success)', fontWeight: 600, fontSize: '1.1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}>
+              <CheckCircle size={20} /> Migração concluída com sucesso!
             </p>
             <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
               As coleções originais foram preservadas como backup no Firestore.
@@ -168,7 +169,10 @@ export default function Migracao() {
                 Migrando...
               </>
             ) : (
-              concluido ? '🔄 Executar novamente' : '🚀 Iniciar migração'
+              concluido
+                ? <><RefreshCw size={16} /> Executar novamente</>
+                : <><Rocket size={16} /> Iniciar migração</>
+
             )}
           </button>
         ) : (

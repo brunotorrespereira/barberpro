@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Pencil, Trash2, Scissors, Phone } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import Modal from '../components/Modal';
 import ConfirmDialog from '../components/ConfirmDialog';
@@ -129,7 +130,9 @@ export default function Barbeiros() {
       <Sidebar />
       <main className="main-content">
         <div className="page-header">
-          <h1 className="page-title">💈 Barbeiros</h1>
+          <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <Scissors size={22} /> Barbeiros
+          </h1>
           <button className="btn btn-primary" onClick={openAdd}>
             + Novo Barbeiro
           </button>
@@ -146,7 +149,7 @@ export default function Barbeiros() {
           </div>
         ) : barbeiros.length === 0 ? (
           <div className="empty-state">
-            <div className="empty-state-icon">💈</div>
+            <div className="empty-state-icon"><Scissors size={48} /></div>
             <div className="empty-state-title">Nenhum barbeiro cadastrado</div>
             <div className="empty-state-text">
               Clique em "+ Novo Barbeiro" para adicionar um profissional.
@@ -187,8 +190,8 @@ export default function Barbeiros() {
                 </span>
 
                 {b.telefone && (
-                  <div className="barber-card-phone">
-                    📞 {b.telefone}
+                  <div className="barber-card-phone" style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                    <Phone size={13} /> {b.telefone}
                   </div>
                 )}
 
@@ -198,14 +201,14 @@ export default function Barbeiros() {
                     title="Editar"
                     onClick={() => openEdit(b)}
                   >
-                    ✏️
+                    <Pencil size={15} />
                   </button>
                   <button
                     className="btn-icon btn-icon-delete"
                     title="Excluir"
                     onClick={() => askDelete(b)}
                   >
-                    🗑️
+                    <Trash2 size={15} />
                   </button>
                 </div>
               </div>
@@ -216,7 +219,11 @@ export default function Barbeiros() {
         <Modal
           isOpen={modalOpen}
           onClose={closeModal}
-          title={editingId ? '✏️ Editar Barbeiro' : '💈 Novo Barbeiro'}
+          title={
+            editingId
+              ? <><Pencil size={16} style={{ verticalAlign: 'middle', marginRight: '0.35rem' }} />Editar Barbeiro</>
+              : <><Scissors size={16} style={{ verticalAlign: 'middle', marginRight: '0.35rem' }} />Novo Barbeiro</>
+          }
           size="md"
         >
           <form onSubmit={handleSubmit}>

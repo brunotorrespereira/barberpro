@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Scissors, Eye, EyeOff, LogIn, Rocket } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { useEmpresa } from '../hooks/useEmpresa';
 import { empresaService } from '../services/empresaService';
@@ -74,7 +75,7 @@ export default function Login() {
   return (
     <div className="login-page">
       <div className="login-hero">
-        <div className="login-hero-icon">✂️</div>
+        <div className="login-hero-icon"><Scissors size={48} /></div>
         <h1 className="login-hero-title">BarberPro</h1>
         <p className="login-hero-subtitle">
           Sistema de Gestão Completo para Barbearias Modernas
@@ -176,7 +177,7 @@ export default function Login() {
                   onClick={() => setShowPassword(prev => !prev)}
                   tabIndex={-1}
                 >
-                  {showPassword ? '🙈' : '👁️'}
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
             </div>
@@ -193,7 +194,10 @@ export default function Login() {
                   {isRegister ? 'Criando sua barbearia...' : 'Entrando...'}
                 </>
               ) : (
-                isRegister ? '🚀 Criar minha barbearia' : '🔑 Entrar'
+                isRegister
+                  ? <><Rocket size={16} /> Criar minha barbearia</>
+                  : <><LogIn size={16} /> Entrar</>
+
               )}
             </button>
           </form>

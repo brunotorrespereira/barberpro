@@ -3,16 +3,25 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { useEmpresa } from '../hooks/useEmpresa';
 import { useToast } from './Toast';
+import {
+  Home,
+  Users,
+  CalendarDays,
+  Scissors,
+  LogOut,
+  Menu,
+  X,
+} from 'lucide-react';
 
 const navItems = [
-  { path: '/', icon: '🏠', label: 'Dashboard', end: true },
-  { path: '/clientes', icon: '👥', label: 'Clientes' },
-  { path: '/agendamentos', icon: '📅', label: 'Agendamentos' },
-  { path: '/barbeiros', icon: '💈', label: 'Barbeiros' },
+  { path: '/',             icon: <Home size={18} />,         label: 'Dashboard',    end: true },
+  { path: '/clientes',     icon: <Users size={18} />,        label: 'Clientes' },
+  { path: '/agendamentos', icon: <CalendarDays size={18} />, label: 'Agendamentos' },
+  { path: '/barbeiros',    icon: <Scissors size={18} />,     label: 'Barbeiros' },
 ];
 
 const adminItems = [
-  { path: '/servicos', icon: '✂️', label: 'Serviços' },
+  { path: '/servicos', icon: <Scissors size={18} />, label: 'Serviços' },
 ];
 
 export default function Sidebar() {
@@ -46,7 +55,7 @@ export default function Sidebar() {
         onClick={() => setOpen(prev => !prev)}
         aria-label="Toggle menu"
       >
-        {open ? '✕' : '☰'}
+        {open ? <X size={20} /> : <Menu size={20} />}
       </button>
 
       <div
@@ -56,7 +65,7 @@ export default function Sidebar() {
 
       <aside className={`sidebar ${open ? 'open' : ''}`}>
         <div className="sidebar-logo">
-          <span className="sidebar-logo-icon">✂️</span>
+          <span className="sidebar-logo-icon"><Scissors size={24} /></span>
           <div>
             <div className="sidebar-logo-text">BarberPro</div>
             <div className="sidebar-logo-sub">Sistema de Gestão</div>
@@ -111,7 +120,7 @@ export default function Sidebar() {
             style={{ width: '100%', justifyContent: 'center' }}
             onClick={handleLogout}
           >
-            🚪 Sair
+            <LogOut size={16} /> Sair
           </button>
         </div>
       </aside>

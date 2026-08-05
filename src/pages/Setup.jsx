@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Scissors, Rocket } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { useEmpresa } from '../hooks/useEmpresa';
 import { empresaService } from '../services/empresaService';
@@ -46,7 +47,7 @@ export default function Setup() {
   return (
     <div className="login-page">
       <div className="login-hero">
-        <div className="login-hero-icon">✂️</div>
+        <div className="login-hero-icon"><Scissors size={48} /></div>
         <h1 className="login-hero-title">BarberPro</h1>
         <p className="login-hero-subtitle">
           Vamos configurar sua barbearia
@@ -129,7 +130,8 @@ export default function Setup() {
                   Criando sua barbearia...
                 </>
               ) : (
-                '🚀 Criar minha barbearia'
+                <><Rocket size={16} /> Criar minha barbearia</>
+
               )}
             </button>
           </form>

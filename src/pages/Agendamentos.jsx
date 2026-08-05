@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { CalendarDays, Pencil, Trash2, X } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import Modal from '../components/Modal';
 import ConfirmDialog from '../components/ConfirmDialog';
@@ -179,7 +180,7 @@ export default function Agendamentos() {
       <Sidebar />
       <main className="main-content">
         <div className="page-header">
-          <h1 className="page-title">📅 Agendamentos</h1>
+          <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><CalendarDays size={22} /> Agendamentos</h1>
           <button className="btn btn-primary" onClick={openAdd}>
             + Novo Agendamento
           </button>
@@ -208,7 +209,7 @@ export default function Agendamentos() {
           </select>
           {(filterData || filterStatus) && (
             <button className="btn btn-secondary btn-sm" onClick={clearFilters}>
-              ✕ Limpar filtros
+              <X size={14} /> Limpar filtros
             </button>
           )}
           <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
@@ -224,7 +225,7 @@ export default function Agendamentos() {
             </div>
           ) : filtered.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-state-icon">📅</div>
+              <div className="empty-state-icon"><CalendarDays size={48} /></div>
               <div className="empty-state-title">Nenhum agendamento encontrado</div>
               <div className="empty-state-text">
                 {filterData || filterStatus
@@ -272,14 +273,14 @@ export default function Agendamentos() {
                               title="Editar"
                               onClick={() => openEdit(a)}
                             >
-                              ✏️
+                              <Pencil size={15} />
                             </button>
                             <button
                               className="btn-icon btn-icon-delete"
                               title="Excluir"
                               onClick={() => askDelete(a)}
                             >
-                              🗑️
+                              <Trash2 size={15} />
                             </button>
                           </div>
                         </td>
@@ -295,7 +296,11 @@ export default function Agendamentos() {
         <Modal
           isOpen={modalOpen}
           onClose={closeModal}
-          title={editingId ? '✏️ Editar Agendamento' : '📅 Novo Agendamento'}
+          title={
+            editingId
+              ? <><Pencil size={16} style={{ verticalAlign: 'middle', marginRight: '0.35rem' }} />Editar Agendamento</>
+              : <><CalendarDays size={16} style={{ verticalAlign: 'middle', marginRight: '0.35rem' }} />Novo Agendamento</>
+          }
           size="md"
         >
           <form onSubmit={handleSubmit}>

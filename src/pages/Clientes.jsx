@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { Pencil, Trash2, Users, Search, UserPlus } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import Modal from '../components/Modal';
 import ConfirmDialog from '../components/ConfirmDialog';
@@ -115,7 +116,9 @@ export default function Clientes() {
       <Sidebar />
       <main className="main-content">
         <div className="page-header">
-          <h1 className="page-title">👥 Clientes</h1>
+          <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <Users size={22} /> Clientes
+          </h1>
           <button className="btn btn-primary" onClick={openAdd}>
             + Novo Cliente
           </button>
@@ -123,7 +126,7 @@ export default function Clientes() {
 
         <div className="filters-bar">
           <div className="search-bar">
-            <span className="search-bar-icon">🔍</span>
+            <span className="search-bar-icon"><Search size={16} /></span>
             <input
               className="input"
               type="text"
@@ -145,7 +148,7 @@ export default function Clientes() {
             </div>
           ) : filtered.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-state-icon">👥</div>
+              <div className="empty-state-icon"><Users size={48} /></div>
               <div className="empty-state-title">
                 {search ? 'Nenhum resultado' : 'Nenhum cliente cadastrado'}
               </div>
@@ -192,14 +195,14 @@ export default function Clientes() {
                             title="Editar"
                             onClick={() => openEdit(c)}
                           >
-                            ✏️
+                            <Pencil size={15} />
                           </button>
                           <button
                             className="btn-icon btn-icon-delete"
                             title="Excluir"
                             onClick={() => askDelete(c)}
                           >
-                            🗑️
+                            <Trash2 size={15} />
                           </button>
                         </div>
                       </td>
@@ -214,7 +217,11 @@ export default function Clientes() {
         <Modal
           isOpen={modalOpen}
           onClose={closeModal}
-          title={editingId ? '✏️ Editar Cliente' : '👤 Novo Cliente'}
+          title={
+            editingId
+              ? <><Pencil size={16} style={{ verticalAlign: 'middle', marginRight: '0.35rem' }} />Editar Cliente</>
+              : <><UserPlus size={16} style={{ verticalAlign: 'middle', marginRight: '0.35rem' }} />Novo Cliente</>
+          }
           size="md"
         >
           <form onSubmit={handleSubmit}>
