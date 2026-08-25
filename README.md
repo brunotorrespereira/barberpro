@@ -119,7 +119,15 @@ dentro dos próprios componentes administrativos.
 
 ## Screenshots
 
-> Esta seção será atualizada com capturas de tela do sistema em breve.
+<p align="center">
+  <img src="docs/screenshots/barberpro-showcase.png"
+       alt="BarberPro - Sistema SaaS de gestão para barbearias"
+       width="100%">
+</p>
+
+<p align="center">
+  Dashboard, autenticação e experiência responsiva do BarberPro em desktop e dispositivos móveis.
+</p>
 
 ---
 
