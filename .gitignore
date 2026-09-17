@@ -9,6 +9,9 @@ dist/
 .env.local
 .env.*.local
 
+# Credencial da service account do Firebase usada pelo backend (server/)
+*serviceAccountKey*.json
+
 # Cache interno do Vite
 .vite/
 
