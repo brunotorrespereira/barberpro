@@ -10,6 +10,7 @@ import Clientes from './pages/Clientes';
 import Agendamentos from './pages/Agendamentos';
 import Barbeiros from './pages/Barbeiros';
 import Servicos from './pages/Servicos';
+import Integracoes from './pages/Integracoes';
 import Migracao from './pages/Migracao';
 import Loading from './components/Loading';
 
@@ -91,6 +92,10 @@ export default function App() {
             <Route
               path="/servicos"
               element={<AdminRoute><Servicos /></AdminRoute>}
+            />
+            <Route
+              path="/integracoes"
+              element={<AdminRoute><Integracoes /></AdminRoute>}
             />
             <Route
               path="/migracao"

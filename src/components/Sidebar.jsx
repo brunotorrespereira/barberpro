@@ -8,6 +8,7 @@ import {
   Users,
   CalendarDays,
   Scissors,
+  MessageCircle,
   LogOut,
   Menu,
   X,
@@ -21,7 +22,8 @@ const navItems = [
 ];
 
 const adminItems = [
-  { path: '/servicos', icon: <Scissors size={18} />, label: 'Serviços' },
+  { path: '/servicos',    icon: <Scissors size={18} />,      label: 'Serviços' },
+  { path: '/integracoes', icon: <MessageCircle size={18} />, label: 'Integrações' },
 ];
 
 export default function Sidebar() {
