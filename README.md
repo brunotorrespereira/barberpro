@@ -62,6 +62,17 @@ e controle total pelo proprietário.
 - Planos com limites funcionais independentes (`starter`, `profissional`)
 - Assinatura desacoplada da empresa, preparada para integração com gateway de pagamento
 
+### Integração com WhatsApp e Agente Sebastião
+- Conexão do WhatsApp da barbearia através da Evolution API
+- Geração de QR Code para vinculação do número
+- Instância Evolution individual por empresa
+- Consulta do status real da conexão
+- Identificação do número WhatsApp conectado
+- Agente virtual Sebastião para atendimento automático
+- Consulta de serviços, barbeiros e disponibilidade
+- Criação de agendamentos diretamente pelo atendimento no WhatsApp
+- Arquitetura preparada para múltiplas barbearias com isolamento por empresa
+
 ---
 
 ## Tecnologias
@@ -77,6 +88,10 @@ e controle total pelo proprietário.
 | Estilização | CSS puro com variáveis customizadas |
 | Tipografia | Inter (Google Fonts) |
 | Deploy | Vercel |
+| Automação | n8n |
+| WhatsApp | Evolution API |
+| IA / Agente | Agente Sebastião integrado ao fluxo n8n |
+| Backend de integração | Node.js / Express |
 
 ---
 
@@ -103,6 +118,11 @@ do escopo dessa empresa.
 A criação de empresa é uma operação **atômica** (`writeBatch`): empresa,
 assinatura e usuário administrador são criados juntos ou não são criados.
 
+Além dos dados operacionais isolados por `empresaId`, cada empresa pode possuir
+sua própria instância da Evolution API. O vínculo entre empresa e instância
+permite que o atendimento via WhatsApp consulte serviços, barbeiros,
+disponibilidade e agendamentos dentro do escopo correto da barbearia.
+
 ---
 
 ## Controle de Acesso
@@ -127,6 +147,16 @@ dentro dos próprios componentes administrativos.
 
 <p align="center">
   Dashboard, autenticação e experiência responsiva do BarberPro em desktop e dispositivos móveis.
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/integracoes-whatsapp.png"
+       alt="Integração com WhatsApp e Agente Sebastião"
+       width="100%">
+</p>
+
+<p align="center">
+  Integração com WhatsApp e Agente Sebastião — status da conexão, instância Evolution vinculada à empresa, número conectado e status do atendimento automático.
 </p>
 
 ---
@@ -254,6 +284,17 @@ O conteúdo da pasta `dist/` é servido como aplicação estática.
 - [x] Proteção de rotas administrativas por perfil
 - [x] Interface responsiva para desktop e mobile
 - [x] Ferramenta de migração de dados
+- [x] Página de Integrações
+- [x] Integração com Evolution API
+- [x] Conexão do WhatsApp por QR Code
+- [x] Instância WhatsApp individual por empresa
+- [x] Agente virtual Sebastião via n8n
+- [x] Consulta de disponibilidade pelo WhatsApp
+- [x] Criação de agendamento pelo atendimento automatizado
+
+> **Nota:** a integração com WhatsApp/Evolution API e o Agente Sebastião já
+> funcionam de ponta a ponta, mas o fluxo ainda está em fase de testes e
+> ajustes para o cenário multi-tenant (múltiplas barbearias simultâneas).
 
 ### Roadmap
 
